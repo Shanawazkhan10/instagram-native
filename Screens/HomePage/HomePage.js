@@ -1,20 +1,13 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, SafeAreaView, StyleSheet } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Avatar } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-const data = [
-  { id: 1, name: "shanawaz" },
-  { id: 2, name: "salman" },
-  { id: 3, name: "sajida" },
-  { id: 4, name: "umar" },
-  { id: 5, name: "dolly" },
-  { id: 6, name: "danish" },
-  { id: 7, name: "ahad" },
-  { id: 8, name: "bamtai" },
-  { id: 9, name: "leo" },
-];
+import Stories from "../../Component/Story/Stories";
+import Feeds from "../../Component/Feeds/Feeds";
+import Footer from "../../Component/Footer/Footer";
+
 const HomePage = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -69,33 +62,32 @@ const HomePage = ({ navigation }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ flexDirection: "row" }}>
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+      <SafeAreaView>
         <ScrollView
-          //   style={{ padding: 20 }}
-          horizontal={true}
+          showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
+          style={styles.scrollView}
         >
-          {data.map(({ id, name }) => (
-            <View style={{ padding: 5 }} key={id}>
-              <Avatar
-                // key={id}
-                //   style={{ marginLeft: 10 }}
-                size="medium"
-                rounded
-                source={{
-                  uri: "https://randomuser.me/api/portraits/",
-                }}
-                title="S"
-              />
-            </View>
-          ))}
-
-          <View />
+          <Stories />
+          <Feeds />
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // paddingTop: StatusBar.currentHeight,
+    padding: 10,
+  },
+  scrollView: {
+    // backgroundColor: "pink",
+    // marginHorizontal: 100,
+  },
+  text: {
+    fontSize: 42,
+  },
+});
 export default HomePage;
